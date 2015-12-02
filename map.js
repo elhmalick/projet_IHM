@@ -137,10 +137,10 @@ function printPlace(place, num)
 
 
     var infowindow = new google.maps.InfoWindow({
-        content: "<div > <h3> " + place.type + "</h3>  </div>"
+        content: "<div > <h3> " + place.name + "</h3>  </div>"
 
     });
-    list.innerHTML += "<div class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" ><h3> " + num + " : " + place.name + "</h3> <h4> " + place.type + "</h4> <p>" + place.description + "</p> </div>"
+    list.innerHTML += "<div class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" ><h3> " + num + " : " + place.name + "</h3> </div>"
 
 
     marker.addListener('click', function () {
