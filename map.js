@@ -137,10 +137,10 @@ function printPlace(place, num)
 
 
     var infowindow = new google.maps.InfoWindow({
-        content: "<div > <h2> " + place.type + "</h2> <p>" + place.description + "</p> </div>"
+        content: "<div > <h3> " + place.type + "</h3>  </div>"
 
     });
-    list.innerHTML += "<div class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" ><h2> " + num + " : " + place.name + "</h2> <h3> " + place.type + "</h3> <p>" + place.description + "</p> </div>"
+    list.innerHTML += "<div class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" ><h3> " + num + " : " + place.name + "</h3> <h4> " + place.type + "</h4> <p>" + place.description + "</p> </div>"
 
 
     marker.addListener('click', function () {
@@ -254,13 +254,20 @@ function save()
     {
         st = {status: 2, place: markers[selected].placeData}
     }
-    temp = st
+    
+    var xhr = new XMLHttpRequest
+    xhr.open("POST","http://geekompagny.ddns.net/mm/projet_IHM/save.php")
+xhr.setRequestHeader ('Content-Type','application/x-www-form-urlencoded')
+    xhr.send("user=titou&state="+escape(JSON.stringify(st)))
 }
 
 function load()
 {
     reset()
-    var st = temp
+        var xhr = new XMLHttpRequest
+    xhr.open("GET","http://geekompagny.ddns.net/mm/projet_IHM/user/titou.json")
+    xhr.onreadystatechange = function () {
+    var st =JSON.parse(xhr.responseText)
     if (st.status == 1)
     {
         center.setPosition(st.center)
@@ -274,4 +281,6 @@ function load()
         printPlace(st.place, 0)
         select(0)
     }
+    }
+        xhr.send()
 }
