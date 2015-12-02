@@ -257,7 +257,8 @@ function save()
     
     var xhr = new XMLHttpRequest
     xhr.open("POST","http://geekompagny.ddns.net/mm/projet_IHM/save.php")
-    xhr.send("user=titou&state="+JSON.stringify(st))
+xhr.setRequestHeader ('Content-Type','application/x-www-form-urlencoded')
+    xhr.send("user=titou&state="+escape(JSON.stringify(st)))
 }
 
 function load()
