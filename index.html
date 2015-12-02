@@ -1,8 +1,9 @@
 
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
         <!move the css in a css file ......>
     <style type="text/css">
         html, body { height: 100%; margin: 0; padding: 0; }
@@ -15,9 +16,14 @@
 </head>
 <body>
     <h1> Bienvenue sur ce fantastique site ... une idée de nom ?  </h1>
-        <div id="list"></div>
+    <div id="list"></div>
     <div id="map"></div>
-
+    <div id="sauv"></div>
+    <div id="config">
+        <input type="checkbox" id="mute" onclick="cancelSpeak()"/>Mute <br />
+        <input type="range" id="range" onchange="setRange()" step="50" value="500" min="50" max="3000" />Range : <span id="range_value"> 500</span>
+        <br />User : <input type="text" id="user" > <button onclick="save()"> Save </button> <button onclick="load()"> Load</button>
+    </div>
     <div id="info"></div>
 
     <script async defer
