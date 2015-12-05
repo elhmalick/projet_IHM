@@ -9,12 +9,14 @@ var markers = []
 var position
 var center
 var direction
+var numbPlace
 var status = 1 //1 search 2 selected
 var selected
 var tempTest //TODO delete
 //call by google for map creation
 function initMap() {
-    getLocation(printMap)
+    getLocation(printMap);
+    listeningSpeak();
 }
 
 //print map centred on user
@@ -132,6 +134,7 @@ function printPlace(place, num)
         title: place.name,
         label: String(num)
     });
+    numbPlace = place.length
     marker.placeData = place
     markers[num] = marker
 
@@ -175,6 +178,84 @@ function speechText(text) {
 function cancelSpeak()
 {
     speechSynthesis.cancel()
+}
+
+// Retourne si le mot indiqué est dans la string donné
+function motDans(str, s)
+{
+    return str.indexOf(s) > -1;
+}
+
+function listeningSpeak()
+{
+    if (!document.getElementById("mute").checked)
+    {
+        var rec = new webkitSpeechRecognition();
+
+        // Activation de la reconnaissance continue
+        rec.continuous = true;
+        rec.lang = 'fr-FR';
+        rec.start();
+        rec.onresult = function(e)
+        {
+            for (var i = e.resultIndex; i < e.results.length; ++i)
+            {
+                if (e.results[i].isFinal)
+                {
+                    var msg = e.results[i][0].transcript;
+                    console.log('Recognised: ' + msg);
+                    speechText(e.results[i][0].transcript);
+                    if(motDans(msg,"sélection"))
+                    {
+                        speechText("ça fonctionne");
+                        if(motDans(msg,"un"))
+                        {
+                            if(numbPlace >= 1)
+                                select(1);
+                        }
+                        else if(motDans(msg,"deux"))
+                        {
+                            if(numbPlace >= 2)
+                                select(2);
+                        }
+                        else if(motDans(msg,"trois"))
+                        {
+                            if(numbPlace >= 3)
+                                select(3);
+                        }
+                        else if(motDans(msg,"quatre"))
+                        {
+                            if(numbPlace >= 4)
+                                select(4);
+                        }
+                        else if(motDans(msg,"cinq"))
+                        {
+                            if(numbPlace >= 5)
+                                select(5);
+                        }
+                        else if(motDans(msg,"six"))
+                        {
+                            if(numbPlace >= 6)
+                                select(6);
+                        }
+                        else
+                        {
+                            speechText("Erreur de sélection");
+                        }
+                    }
+                    else if(motDans(msg,"retour"))
+                    {
+                        backToSearch();
+                    }
+                    else if(motDans(msg,"recherche"))
+                    {
+                        backToSearch();
+                        // faire recherche sur la map
+                    }
+                }
+            }
+        }
+    }
 }
 
 function select(num)
