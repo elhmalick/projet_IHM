@@ -140,10 +140,10 @@ function printPlace(place, num)
 
 
     var infowindow = new google.maps.InfoWindow({
-        content: "<div > <h2> " + place.type + "</h2> <p>" + place.description + "</p> </div>"
+        content: "<div > <h3> " + place.name + "</h3>  </div>"
 
     });
-    list.innerHTML += "<div class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" ><h2> " + num + " : " + place.name + "</h2> <h3> " + place.type + "</h3> <p>" + place.description + "</p> </div>"
+    list.innerHTML += "<div class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" ><h3> " + num + " : " + place.name + "</h3> </div>"
 
 
     marker.addListener('click', function () {
@@ -204,39 +204,43 @@ function listeningSpeak()
                 {
                     var msg = e.results[i][0].transcript;
                     console.log('Recognised: ' + msg);
-                    speechText(e.results[i][0].transcript);
                     if(motDans(msg,"sélection"))
                     {
-                        speechText("ça fonctionne");
                         if(motDans(msg,"un"))
                         {
-                            if(numbPlace >= 1)
-                                select(1);
+                            select(1);
                         }
-                        else if(motDans(msg,"deux"))
+                        else if(motDans(msg,"2"))
                         {
-                            if(numbPlace >= 2)
-                                select(2);
+                            select(2);
                         }
-                        else if(motDans(msg,"trois"))
+                        else if(motDans(msg,"3"))
                         {
-                            if(numbPlace >= 3)
-                                select(3);
+                            select(3);
                         }
-                        else if(motDans(msg,"quatre"))
+                        else if(motDans(msg,"4"))
                         {
-                            if(numbPlace >= 4)
-                                select(4);
+                            select(4);
                         }
-                        else if(motDans(msg,"cinq"))
+                        else if(motDans(msg,"5"))
                         {
-                            if(numbPlace >= 5)
-                                select(5);
+                            select(5);
                         }
-                        else if(motDans(msg,"six"))
+                        else if(motDans(msg,"6"))
                         {
-                            if(numbPlace >= 6)
-                                select(6);
+                            select(6);
+                        }
+                        else if(motDans(msg,"7"))
+                        {
+                            select(7);
+                        }
+                        else if(motDans(msg,"8"))
+                        {
+                            select(8);
+                        }
+                        else if(motDans(msg,"9"))
+                        {
+                            select(9);
                         }
                         else
                         {
@@ -335,13 +339,20 @@ function save()
     {
         st = {status: 2, place: markers[selected].placeData}
     }
-    temp = st
+    
+    var xhr = new XMLHttpRequest
+    xhr.open("POST","http://geekompagny.ddns.net/mm/projet_IHM/save.php")
+xhr.setRequestHeader ('Content-Type','application/x-www-form-urlencoded')
+    xhr.send("user=titou&state="+escape(JSON.stringify(st)))
 }
 
 function load()
 {
     reset()
-    var st = temp
+        var xhr = new XMLHttpRequest
+    xhr.open("GET","http://geekompagny.ddns.net/mm/projet_IHM/user/titou.json")
+    xhr.onreadystatechange = function () {
+    var st =JSON.parse(xhr.responseText)
     if (st.status == 1)
     {
         center.setPosition(st.center)
@@ -355,4 +366,6 @@ function load()
         printPlace(st.place, 0)
         select(0)
     }
+    }
+        xhr.send()
 }
