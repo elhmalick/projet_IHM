@@ -269,7 +269,7 @@ function select(num)
     selected = num
     status = 2
     var list = document.getElementById("list")
-    list.innerHTML = "<a onclick=\"backToSearch()\"> Back </a><br /><h2>" + markers[num].placeData.name + "</h2>"
+    list.innerHTML = "<button type=\"button\" class=\"btn btn-primary\" onclick=\"backToSearch()\"> Retour </button> <br /><h2>" + markers[num].placeData.name + "</h2>"
     direction = new google.maps.DirectionsRenderer({
         map: map,
         panel: list// Dom element pour afficher les directions d'itinéraire
