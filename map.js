@@ -270,13 +270,13 @@ function listeningSpeak()
                         backToSearch();
                         // faire recherche sur la map
                     }
-                    else if(motDans(msg,"stop"))
+                    else if(motDans(msg,"arrête"))
                     {
                         cancelSpeak();
                     }
                     else if(motDans(msg,"répète"))
                     {
-                        speechText("Je vais tout répèter");
+                        generateSpeech();
                     }
                 }
             }
