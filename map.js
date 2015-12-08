@@ -110,7 +110,7 @@ function getPlaces( )
 
 function generateSpeech()
 {
- speechText("On a trouvé " + markers.length-1 + " places")
+ speechText("On a trouvé " + markers.length + " places")
 for( var i in markers)
 {
         speechText("Place " + (i ));
