@@ -270,7 +270,7 @@ function listeningSpeak()
                         backToSearch();
                         // faire recherche sur la map
                     }
-                    else if(motDans(msg,"stop"))
+                    else if(motDans(msg,"arrête"))
                     {
                         cancelSpeak();
                     }
