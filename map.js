@@ -96,7 +96,7 @@ function getPlaces( )
             for (var i = 0; i < results.length && i < 9; i++) {
                 places[places.length] = {name: results[i].name, position: results[i].geometry.location, description: "", type: "Restaurant"}
             }
-
+            
             printPlaces(places)
         }
         else //message d'erreur
@@ -345,14 +345,14 @@ function save()
     var xhr = new XMLHttpRequest
     xhr.open("POST","http://geekompagny.ddns.net/mm/projet_IHM/save.php")
 xhr.setRequestHeader ('Content-Type','application/x-www-form-urlencoded')
-    xhr.send("user=titou&state="+escape(JSON.stringify(st)))
+    xhr.send("user="+user.value+"&state="+escape(JSON.stringify(st)))
 }
 
 function load()
 {
     reset()
         var xhr = new XMLHttpRequest
-    xhr.open("GET","http://geekompagny.ddns.net/mm/projet_IHM/user/titou.json")
+    xhr.open("GET","http://geekompagny.ddns.net/mm/projet_IHM/user/"+user.value+".json")
     xhr.onreadystatechange = function () {
     var st =JSON.parse(xhr.responseText)
     if (st.status == 1)
