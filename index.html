@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>Manger Bouger</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
     </style>
   </head>
 
-  <body>
+  <body onload="getLogin()">
 
    <div class="container">
                  
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="col-md-5">
-                <br />User : <input type="text" id="user" >  <button type="button" class="btn btn-primary" onclick="save()"> Save </button> <button type="button" class="btn btn-primary" onclick="load()"> Load</button>            
+                <br />User : <input type="text" id="user"onchange="saveLogin()" >  <button type="button" class="btn btn-primary" onclick="save()"> Save </button> <button type="button" class="btn btn-primary" onclick="load()"> Load</button>            
             </div>
       </div>
       

@@ -144,10 +144,9 @@ function printPlace(place, num)
 
     });
      list.innerHTML += "<div id=\"bordure\"class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" style=\"cursor: pointer;color:#\"  ><h3> " + num + " : " + place.name + "</h3>  </div>"
-   
+
    //     list.innerHTML += "<button type=\"button\" class=\"btn btn-default\" id=\"bordure\"class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" > <h3> " + num + " : " + place.name + "</h3> </button>"
 
-    
     marker.addListener('click', function () {
         infowindow.open(map, marker);
     });
@@ -168,7 +167,7 @@ function stopBounce(num)
 
 function speechText(text) {
 
-    if (document.getElementById("mute").checked)
+    if (!document.getElementById("mute").checked)
     {
         var msg_speech = new SpeechSynthesisUtterance();
         msg_speech.lang = 'fr-FR';
@@ -258,6 +257,14 @@ function listeningSpeak()
                         backToSearch();
                         // faire recherche sur la map
                     }
+                    else if(motDans(msg,"stop"))
+                    {
+                        cancelSpeak();
+                    }
+                    else if(motDans(msg,"répète"))
+                    {
+                        speechText("Je vais tout répèter");
+                    }
                 }
             }
         }
@@ -345,14 +352,14 @@ function save()
     var xhr = new XMLHttpRequest
     xhr.open("POST","http://geekompagny.ddns.net/mm/projet_IHM/save.php")
 xhr.setRequestHeader ('Content-Type','application/x-www-form-urlencoded')
-    xhr.send("user=titou&state="+escape(JSON.stringify(st)))
+    xhr.send("user="+user.value+"&state="+escape(JSON.stringify(st)))
 }
 
 function load()
 {
     reset()
         var xhr = new XMLHttpRequest
-    xhr.open("GET","http://geekompagny.ddns.net/mm/projet_IHM/user/titou.json")
+    xhr.open("GET","http://geekompagny.ddns.net/mm/projet_IHM/user/"+user.value+".json")
     xhr.onreadystatechange = function () {
     var st =JSON.parse(xhr.responseText)
     if (st.status == 1)
@@ -370,4 +377,25 @@ function load()
     }
     }
         xhr.send()
+}
+
+function getLogin()
+{
+user.value=getCookie("user_ihm")||""
+}
+
+function saveLogin()
+{
+setCookie("user_ihm",user.value)
+}
+
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function setCookie(name,value) {
+    var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
 }
