@@ -96,7 +96,7 @@ function getPlaces( )
             for (var i = 0; i < results.length && i < 9; i++) {
                 places[places.length] = {name: results[i].name, position: results[i].geometry.location, description: "", type: "Restaurant"}
             }
-            
+
             printPlaces(places)
         }
         else //message d'erreur
@@ -157,10 +157,9 @@ function printPlace(place, num)
 
     });
      list.innerHTML += "<div id=\"bordure\"class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" style=\"cursor: pointer;color:#\"  ><h3> " + num + " : " + place.name + "</h3>  </div>"
-   
+
    //     list.innerHTML += "<button type=\"button\" class=\"btn btn-default\" id=\"bordure\"class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" > <h3> " + num + " : " + place.name + "</h3> </button>"
 
-    
     marker.addListener('click', function () {
         infowindow.open(map, marker);
     });
@@ -271,6 +270,14 @@ function listeningSpeak()
                         backToSearch();
                         // faire recherche sur la map
                     }
+                    else if(motDans(msg,"stop"))
+                    {
+                        cancelSpeak();
+                    }
+                    else if(motDans(msg,"répète"))
+                    {
+                        speechText("Je vais tout répèter");
+                    }
                 }
             }
         }
@@ -282,7 +289,7 @@ function select(num)
     selected = num
     status = 2
     var list = document.getElementById("list")
-    list.innerHTML = "<a onclick=\"backToSearch()\"> Back </a><br /><h2>" + markers[num].placeData.name + "</h2>"
+    list.innerHTML = "<button type=\"button\" class=\"btn btn-primary\" onclick=\"backToSearch()\"> Retour </button> <br /><h2>" + markers[num].placeData.name + "</h2>"
     direction = new google.maps.DirectionsRenderer({
         map: map,
         panel: list// Dom element pour afficher les directions d'itinéraire
