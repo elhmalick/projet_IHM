@@ -40,53 +40,33 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"></a>
+   <div class="container">
+                 
+        <div class="jumbotron">
+          <div class="container">
+            <h1>Bienvenue sur "Manger Bouger"</h1>
+            <p>Cette application vous permet de chercher les restaurants qui sont près de votre position.</p>
+            
+          </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="malick@malick" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Bienvenue sur "ou manger à midi(lol)"</h1>
-        <p>Cette application vous permet de chercher les restaurants qui sont près de votre position.</p>
         
-      </div>
-    </div>
+       
+   </div>
+   
 
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
-          <div class="col-md-6">
-                <div id="sauv"></div>
+          <div class="col-md-5">
+                <div id="sauv">
+                </div>
                 <div id="config">
-                    <input type="checkbox" id="mute" onclick="cancelSpeak()"/>Mute <br />
+                    <input type="checkbox" id="mute" onclick="cancelSpeak()"/> &nbsp;Mute <br />
                     <input type="range" id="range" onchange="setRange()" step="50" value="500" min="50" max="3000" />Range : <span id="range_value"> 500</span>
                 </div>
             </div>
-            
-            <div class="col-md-6">
-                    <br />User : <input type="text" id="user" > <button onclick="save()"> Save </button> <button onclick="load()"> Load</button>            
+            <div class="col-md-5">
+                <br />User : <input type="text" id="user" >  <button type="button" class="btn btn-primary" onclick="save()"> Save </button> <button type="button" class="btn btn-primary" onclick="load()"> Load</button>            
             </div>
       </div>
       
@@ -94,7 +74,7 @@
                   
             <div id ="map" class="col-md-9">  </div>
             
-            <div id="list" class="col-md-3">  </div>
+            <div id="list" class="rectangle col-md-3">  </div>
             
       </div>
       

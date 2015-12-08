@@ -143,9 +143,11 @@ function printPlace(place, num)
         content: "<div > <h3> " + place.name + "</h3>  </div>"
 
     });
-    list.innerHTML += "<div class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" ><h3> " + num + " : " + place.name + "</h3> </div>"
+     list.innerHTML += "<div id=\"bordure\"class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" style=\"cursor: pointer;color:#\"  ><h3> " + num + " : " + place.name + "</h3>  </div>"
+   
+   //     list.innerHTML += "<button type=\"button\" class=\"btn btn-default\" id=\"bordure\"class=\"place-info\" onmouseover=\"bounce(" + num + ")\" onmouseout=\"stopBounce(" + num + ")\" onclick=\"select(" + num + ")\" > <h3> " + num + " : " + place.name + "</h3> </button>"
 
-
+    
     marker.addListener('click', function () {
         infowindow.open(map, marker);
     });
@@ -166,7 +168,7 @@ function stopBounce(num)
 
 function speechText(text) {
 
-    if (!document.getElementById("mute").checked)
+    if (document.getElementById("mute").checked)
     {
         var msg_speech = new SpeechSynthesisUtterance();
         msg_speech.lang = 'fr-FR';
