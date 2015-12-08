@@ -276,7 +276,7 @@ function listeningSpeak()
                     }
                     else if(motDans(msg,"répète"))
                     {
-                        speechText("Je vais tout répèter");
+                        generateSpeech();
                     }
                 }
             }
