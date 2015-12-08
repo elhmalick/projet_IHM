@@ -107,6 +107,18 @@ function getPlaces( )
     });
 
 }
+
+function generateSpeech()
+{
+ speechText("On a trouvé " + markers.length-1 + " places")
+for( var i in markers)
+{
+        speechText("Place " + (i ));
+        speechText(markers[i].placeData.name);
+
+}
+
+}
 //print a list of places
 function printPlaces(places)
 {
@@ -114,13 +126,14 @@ function printPlaces(places)
     deleteMarkers()
     list.innerHTML = ""
 
-    speechText("On a trouvé " + places.length + " places");
+   // speechText("On a trouvé " + places.length + " places");
     for (var i in places)
     {
         printPlace(places[i], +i + 1)
-        speechText("Place " + (+i + 1));
-        speechText(places[i].name);
+        //speechText("Place " + (+i + 1));
+        //speechText(places[i].name);
     }
+	generateSpeech()
 }
 
 //print a place
@@ -168,7 +181,7 @@ function stopBounce(num)
 
 function speechText(text) {
 
-    if (document.getElementById("mute").checked)
+    if (!document.getElementById("mute").checked)
     {
         var msg_speech = new SpeechSynthesisUtterance();
         msg_speech.lang = 'fr-FR';
